@@ -27,7 +27,7 @@ PhysicsFactory::~PhysicsFactory(void)
 void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth)
 {
 	float z = startAt.z;
-	float gap = 1;
+	float gap = 0.6f;
 
 	for (int w = 0 ; w < width ; w ++)
 	{

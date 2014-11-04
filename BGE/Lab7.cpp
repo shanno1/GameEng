@@ -84,6 +84,6 @@ void Lab7::Update()
 	ship1->transform->velocity *= 0.99f;
 	// Reset the force accumulator
 	force = glm::vec3(0, 0, 0);
-	Game::Update();
+	Game::Update(Time::deltaTime);
 
 }
