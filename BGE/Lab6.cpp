@@ -100,17 +100,13 @@ void Lab6::Update(float timeDelta)
 	}
 
 
-	// Put code for ship1 here!!!
-	/*
-	// Solution to part 1
-	glm::vec3 toShip2 = ship2->position - ship1->position;
+	glm::vec3 toShip2 = ship2->transform->position - ship1->transform->position;
 	toShip2 = glm::normalize(toShip2);
 	glm::vec3 axis = glm::cross(Transform::basisLook, toShip2);
 	axis = glm::normalize(axis);
 	float theta = glm::acos(glm::dot(toShip2, Transform::basisLook));
-	ship1->orientation = glm::angleAxis(glm::degrees(theta), axis);
-	*/
-	// End code for ship 1	
+	ship1->transform->orientation = glm::angleAxis(glm::degrees(theta), axis);
+	
 	Game::Update(timeDelta);
 
 }

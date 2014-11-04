@@ -3,6 +3,8 @@
 #include "VectorDrawer.h"
 #include "LazerBeam.h"
 #include "FountainEffect.h"
+#include "Utils.h"
+#include <ctime>
 
 using namespace BGE;
 
@@ -21,16 +23,16 @@ const float standardMass = 10.0f;
 bool Lab7::Initialise()
 {
 	std::shared_ptr<GameComponent> ground = make_shared<Ground>();
-	Attach(ground);	
+	Attach(ground);
 
 	ship1 = make_shared<GameComponent>();
-	ship1->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
+	ship1->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0, 1, 0))));
 	ship1->transform->position = glm::vec3(-10, 2, -10);
 	ship1->Attach(make_shared<VectorDrawer>());
 	Attach(ship1);
 
 	mass = standardMass;
-	ship1->transform->velocity = glm::vec3(0,0,0);
+	ship1->transform->velocity = glm::vec3(0, 0, 0);
 
 	Game::Initialise();
 
@@ -38,8 +40,8 @@ bool Lab7::Initialise()
 	return true;
 }
 
-void Lab7::Update(float timeDelta)
-{	
+void Lab7::Update()
+{
 	// Forces on ship1
 	float newtons = 10.0f;
 	float epsilon = glm::epsilon<float>();
@@ -62,12 +64,12 @@ void Lab7::Update(float timeDelta)
 
 	// Now calculate the acceleration, new velocity and new transform->position
 	glm::vec3 accel = force / mass;
-	ship1->transform->velocity += accel * timeDelta;
-	ship1->transform->position += ship1->transform->velocity * timeDelta;
+	ship1->transform->velocity += accel * 
+	ship1->transform->position += ship1->transform->velocity * Time::deltaTime;
 	// Check if the velocity length is > epsilon and if so create the look vector from the velocity
 	if (glm::length(ship1->transform->velocity) > epsilon)
 	{
-		ship1->transform->look = glm::normalize(ship1->transform->velocity);		
+		ship1->transform->look = glm::normalize(ship1->transform->velocity);
 	}
 	// Now check to see if the |look - basis| > epsilon
 	// And if so calculate the quaternion
@@ -81,7 +83,7 @@ void Lab7::Update(float timeDelta)
 	// Apply damping
 	ship1->transform->velocity *= 0.99f;
 	// Reset the force accumulator
-	force = glm::vec3(0,0,0);
-	Game::Update(timeDelta);
+	force = glm::vec3(0, 0, 0);
+	Game::Update();
 
 }

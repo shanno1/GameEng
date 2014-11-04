@@ -4,6 +4,7 @@
 #include "LazerBeam.h"
 #include "FountainEffect.h"
 
+
 using namespace BGE;
 
 Lab4::Lab4(void)
@@ -46,7 +47,25 @@ bool Lab4::Initialise()
 	fountainTheta = 0.0f; 
 	for (int i = 0 ; i < NUM_FOUNTAINS ; i ++)
 	{
-		
+
+		//THIS IS THE SOLUTION VERSION!
+		fountainTheta = ((glm::pi<float>() * 2.0f) / NUM_FOUNTAINS) * i;
+		shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(500, true);
+		if (i % 2 == 0)
+		{
+			fountain->transform->diffuse = glm::vec3(1, 0, 0);
+		}
+		else
+		{
+			fountain->transform->diffuse = glm::vec3(0, 1, 0);
+		}
+
+		fountain->transform->position.x = glm::sin(fountainTheta) * FOUNTAIN_RADIUS;
+		fountain->transform->position.z = -glm::cos(fountainTheta) * FOUNTAIN_RADIUS;
+		fountain->transform->position.y = FOUNTAIN_HEIGHT;
+		fountains.push_back(fountain);
+		Attach(fountain);
+		//END OF SOLUTION
 	}
 
 	Game::Initialise();
@@ -79,9 +98,18 @@ void Lab4::Update(float timeDelta)
 	// Use fountainTheta
 	for (int i = 0 ; i < fountains.size() ; i ++)
 	{
-		
+		if (i % 2 == 0)
+		{
+			fountains[i]->transform->position.y = FOUNTAIN_HEIGHT + (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
+		}
+		else
+		{
+			fountains[i]->transform->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
+		}
 		
 	}
+
+
 	fountainTheta += timeDelta;
 	if (fountainTheta >= glm::pi<float>() * 2.0f)
 	{
@@ -90,7 +118,18 @@ void Lab4::Update(float timeDelta)
 
 	Game::Update(timeDelta);
 
+	glm::mat4 posMat = glm::translate(glm::mat4(1), transform->position);
+	
+
+	float theta = 0.0f;
+	glm::vec3 toShip2 = ship2->transform->position - ship1->transform->position;
+	toShip2 = glm::normalize(toShip2);
+	theta = glm::acos(glm::dot(Transform::basisLook, toShip2));
+	if (toShip2.x > 0){
+		theta = - theta;
+	}
 	// Put your code here to calculate the world transform matrix for ship1
 	// You need to include the rotation bit
-	ship1->transform->world = glm::translate(glm::mat4(1), ship1->transform->position);
+	ship1->transform->world = glm::translate(posMat, ship1->transform->position);
+
 }

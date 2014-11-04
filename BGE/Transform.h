@@ -5,6 +5,7 @@
 #include <gtx/quaternion.hpp>
 #include <memory>
 #include <iostream> 
+#include <time.h>
 
 
 
@@ -40,11 +41,10 @@ namespace BGE
 		void Strafe(float units); 
 		void Fly(float units);    
 		void Walk(float units);   
-
 		void Pitch(float angle, bool limitRotation = true); // rotate on right vector
 		void Yaw(float angle);   // rotate on up vector
 		void Roll(float angle);  // rotate on look vector
-
+		void Jump(float height, float gravity);
 		void RecalculateVectors();
 		void RotateVectors();
 		void Calculate();

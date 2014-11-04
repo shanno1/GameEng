@@ -3,9 +3,9 @@
 #include "GameComponent.h"
 #include "FountainEffect.h"
 
-#define NUM_FOUNTAINS 20
-#define FOUNTAIN_RADIUS 40.0f
-#define FOUNTAIN_HEIGHT 10.0f
+#define NUM_FOUNTAINS 4
+#define FOUNTAIN_RADIUS 20.0f
+#define FOUNTAIN_HEIGHT 80.0f
 
 using namespace std;
 

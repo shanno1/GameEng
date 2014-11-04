@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameComponent.h"
 #include "FountainEffect.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -17,10 +18,9 @@ namespace BGE
 		shared_ptr<GameComponent> ship1;
 		float elapsed;
 		bool Initialise();
-		void Update(float timeDelta);
+		void Update();
 
 		glm::vec3 force;
 		float mass;
 	};
 }
-

@@ -1,6 +1,7 @@
 #include "Transform.h"
 #include "Utils.h"
 
+
 using namespace BGE;
 
 const glm::vec3 Transform::basisUp = glm::vec3(0, 1, 0);
@@ -181,6 +182,11 @@ void Transform::Roll(float angle)
 	moved = true;
 }
 
+void Transform::Jump(float height, float gravity)
+{
+	velocity += gravity * Time::deltaTime;
+	position += velocity * Time::deltaTime;
+}
 glm::quat BGE::Transform::TransformOrientation(glm::quat in)
 {
 	Transform::Calculate();
