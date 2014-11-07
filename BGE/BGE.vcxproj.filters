@@ -289,9 +289,6 @@
     <ClInclude Include="RiftController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="XBoxController.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsGame1.h">
       <Filter>Games</Filter>
     </ClInclude>
@@ -408,6 +405,9 @@
     </ClInclude>
     <ClInclude Include="AssignmentClass.h">
       <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="XBoxController.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

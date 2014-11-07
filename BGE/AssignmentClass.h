@@ -3,6 +3,7 @@
 #include "PhysicsController.h"
 #include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
+#include "Utils.h"
 
 namespace BGE
 {
@@ -15,8 +16,8 @@ namespace BGE
 		AssignmentClass(void);
 		~AssignmentClass(void);
 		bool Initialise();
-		void Update(float timeDelta);
+		void Update(float Time);
 		void Cleanup();
-		void CreateWall();
+		void CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth);
 	};
 }

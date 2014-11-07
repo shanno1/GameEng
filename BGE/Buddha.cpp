@@ -8,10 +8,10 @@ using namespace BGE;
 
 Buddha::Buddha(void)
 {
+	
 	elapsed = 10000;
+
 }
-
-
 bool Buddha::Initialise()
 {	
 	
