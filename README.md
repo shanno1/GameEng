@@ -7,6 +7,8 @@ Description:
 
 I am hoping to make a robot bearded dragon(Lizard) based on my own one whose name is Ralf! I plan to make him walk as realistically as I possibly can using its own power! I would like to make use of the RigidBodies, joints and motors to achieve this and also by creating a realistic texture hopefully I can make him look like one aswell.
 
+For the jazz factor of the assignment I will use spacebar to place worms(retangles) into the scene and ralf the animat will automatically detect, slerp and attack the worm.
+
 Picture Drawings:
 ![ALT text](https://github.com/shanno1/GameEng/blob/Assignment/2014-11-07%2012.39.34.jpg)
  
