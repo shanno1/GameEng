@@ -14,6 +14,7 @@
 #include <gtx/norm.hpp>
 #include "VectorDrawer.h"
 #include "Utils.h"
+#include "GravityController.h"
 
 using namespace BGE;
 
@@ -55,7 +56,7 @@ bool AssignmentClass::Initialise()
 	shared_ptr<PhysicsController> box3 = physicsFactory->CreateBox(6, 5, 2, glm::vec3(15, 10, 0), glm::quat());
 //	hinge = new btHingeConstraint(*box2->rigidBody, *box3->rigidBody, btVector3(0, 0, -6), btVector3(0, 3, 0), btVector3(0, 0, 1), btVector3(0, 1, 0), true);
 	//dynamicsWorld->addConstraint(hinge);
-	
+	ball_joint->Attach(make_shared<GravityController>);
 	shared_ptr<PhysicsController> MIDJOINT = physicsFactory->CreateCylinder(.5f, .5f, glm::vec3(15, 10, 0), glm::angleAxis(90.0f, glm::vec3(0, 0, 1)));
 	//hinge = new btHingeConstraint(*MIDJOINT->rigidBody,*box3->rigidBody , btVector3(0, 0, 1), btVector3(0, 3, 0), btVector3(0, 1,0), btVector3(0, 1, 0), true);
 	btPoint2PointConstraint * ptpConstraint = new btPoint2PointConstraint(*box3->rigidBody, *ball_joint->rigidBody, btVector3(0, 0, 2.5f), btVector3(0, 0, -2.5f));
@@ -68,7 +69,7 @@ bool AssignmentClass::Initialise()
 
 	btSliderConstraint * slider = new btSliderConstraint(*box1->rigidBody, *box2->rigidBody, box1Transform, box2Transform, true);
 	dynamicsWorld->addConstraint(slider);
-	return true;
+	return Game::Initialise();
 }
 
 void BGE::AssignmentClass::Update(float deltaTime)
@@ -81,7 +82,7 @@ void BGE::AssignmentClass::Cleanup()
 {
 	Game::Cleanup();
 }
-void AssignmentClass::CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth){
+void BGE::AssignmentClass::CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth){
 	
 	float z = startAt.z;
 

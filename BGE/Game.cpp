@@ -127,6 +127,10 @@ void Game::SetGround(shared_ptr<Ground> ground)
 	this->ground = ground;
 	Attach(ground);
 }
+void BGE::Game::setGravity(glm::vec3 gravity)
+{
+	dynamicsWorld->setGravity(GLToBtVector(gravity));
+}
 
 void Game::Update(float timeDelta) {
 	// Check for messages

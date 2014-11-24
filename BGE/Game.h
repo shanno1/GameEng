@@ -81,7 +81,7 @@ namespace BGE
 		void Draw();
 		void PostDraw();
 		void Cleanup();
-		
+		void setGravity(glm::vec3 gravity);
 		shared_ptr<Ground> GetGround();
 		void SetGround(shared_ptr<Ground> ground);
 		const Uint8 * GetKeyState();

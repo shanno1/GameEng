@@ -227,6 +227,9 @@
     <ClCompile Include="AssignmentClass.cpp">
       <Filter>Games</Filter>
     </ClCompile>
+    <ClCompile Include="GravityController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -408,6 +411,9 @@
     </ClInclude>
     <ClInclude Include="XBoxController.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityController.h">
+      <Filter>Controllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
