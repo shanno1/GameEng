@@ -29,9 +29,13 @@ AssignmentClass::~AssignmentClass(void)
 
 bool AssignmentClass::Initialise()
 {	
-	shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1, 1, 4, glm::vec3(5,10, 0), glm::quat());
-	shared_ptr<PhysicsController> box2 = physicsFactory->CreateBox(1, 1, 4, glm::vec3(5,10, 5), glm::quat());
-
+	setGravity(glm::vec3(0, 0, 0));
+	//foot f_left, f_right,b_left, b_right
+	//leg f_left, f_right,b_left, b_right
+	//head
+	//body top, flexjoint, back
+	//tail 10ball joints decreasing in size.
+	
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();	
 	CreateWall(glm::vec3(0,35,0),30,10,1,1,1);
@@ -47,28 +51,33 @@ bool AssignmentClass::Initialise()
 	btTransform box2Transform;
 	box1Transform.setIdentity();
 	box2Transform.setIdentity();
+	shared_ptr<PhysicsController> sphere1 = physicsFactory->CreateSphere(5, glm::vec3(-5, 10, 0), glm::quat(), true, true);
+	shared_ptr<PhysicsController> sphere = physicsFactory->CreateSphere(5, glm::vec3(5, 10, 0), glm::quat(), true, true);
+	//shared_ptr<PhysicsController> sphere = physicsFactory->CreateSphere(float radius, glm::vec3(0,0,0)[position], glm::quat(), true, true)
+	//shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(height, width, depth, glm::vec3(5,10, 0), glm::quat());
+	btHingeConstraint * hinge = new btHingeConstraint(*sphere1->rigidBody, *sphere->rigidBody, btVector3(0, 0, 0), btVector3(0, 0, 0), btVector3(1, 0, 0), btVector3(1, 0, 0), true);
 
 	// A hinge
 	//btHingeConstraint * hinge = new btHingeConstraint(*box1->rigidBody, *box2->rigidBody, btVector3(0, 0, 2.5f), btVector3(0, 0, -2.5f), btVector3(0, 1, 0), btVector3(0, 1, 0), true);
 	//dynamicsWorld->addConstraint(hinge);
-	shared_ptr<PhysicsController> ball_joint = physicsFactory->CreateSphere(1.f,glm::vec3(0,10,0), glm::quat(),true,true);
+	//shared_ptr<PhysicsController> ball_joint = physicsFactory->CreateSphere(1.f,glm::vec3(0,10,0), glm::quat(),true,true);
 	// Another hinge
-	shared_ptr<PhysicsController> box3 = physicsFactory->CreateBox(6, 5, 2, glm::vec3(15, 10, 0), glm::quat());
+	//shared_ptr<PhysicsController> box3 = physicsFactory->CreateBox(6, 5, 2, glm::vec3(15, 10, 0), glm::quat());
 //	hinge = new btHingeConstraint(*box2->rigidBody, *box3->rigidBody, btVector3(0, 0, -6), btVector3(0, 3, 0), btVector3(0, 0, 1), btVector3(0, 1, 0), true);
 	//dynamicsWorld->addConstraint(hinge);
-	ball_joint->Attach(make_shared<GravityController>);
-	shared_ptr<PhysicsController> MIDJOINT = physicsFactory->CreateCylinder(.5f, .5f, glm::vec3(15, 10, 0), glm::angleAxis(90.0f, glm::vec3(0, 0, 1)));
+	
+	//shared_ptr<PhysicsController> MIDJOINT = physicsFactory->CreateCylinder(.5f, .5f, glm::vec3(15, 10, 0), glm::angleAxis(90.0f, glm::vec3(0, 0, 1)));
 	//hinge = new btHingeConstraint(*MIDJOINT->rigidBody,*box3->rigidBody , btVector3(0, 0, 1), btVector3(0, 3, 0), btVector3(0, 1,0), btVector3(0, 1, 0), true);
-	btPoint2PointConstraint * ptpConstraint = new btPoint2PointConstraint(*box3->rigidBody, *ball_joint->rigidBody, btVector3(0, 0, 2.5f), btVector3(0, 0, -2.5f));
-	dynamicsWorld->addConstraint(ptpConstraint);
+	//btPoint2PointConstraint * ptpConstraint = new btPoint2PointConstraint(*box3->rigidBody, *ball_joint->rigidBody, btVector3(0, 0, 2.5f), btVector3(0, 0, -2.5f));
+	dynamicsWorld->addConstraint(hinge);
 	//dynamicsWorld->addConstraint(hinge);
 
 	// You have to make the x axis rotate to the axis you want to slide
 	//box1Transform.setRotation(GLToBtQuat(glm::angleAxis(60.0f, glm::vec3(0, 1, 0))));
 	//box2Transform.setRotation(GLToBtQuat(glm::angleAxis(60.0f, glm::vec3(0, 1, 0))));
 
-	btSliderConstraint * slider = new btSliderConstraint(*box1->rigidBody, *box2->rigidBody, box1Transform, box2Transform, true);
-	dynamicsWorld->addConstraint(slider);
+	//btSliderConstraint * slider = new btSliderConstraint(*box1->rigidBody, *box2->rigidBody, box1Transform, box2Transform, true);
+	//dynamicsWorld->addConstraint(slider);
 	return Game::Initialise();
 }
 
