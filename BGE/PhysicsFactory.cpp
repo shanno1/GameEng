@@ -235,7 +235,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateVehicle(glm::vec3 position)
 	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
-	offset = glm::vec3(+ (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
+	/*offset = glm::vec3(+ (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, glm::vec3(position.x + (width / 2) - wheelRadius, position.y, position.z - (length / 2) - wheelWidth), q);
 	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
@@ -249,7 +249,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateVehicle(glm::vec3 position)
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
 	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
-
+	*/
 	return chassis;
 }
 
