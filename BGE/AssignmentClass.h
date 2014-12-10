@@ -19,5 +19,7 @@ namespace BGE
 		void Update(float Time);
 		void Cleanup();
 		void CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth);
+		void CreateTree(glm::vec3 pos);
+
 	};
 }

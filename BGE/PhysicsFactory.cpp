@@ -262,6 +262,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 
 	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0,groundMotionState,groundShape,btVector3(0,0,0));
 	btRigidBody* body = new btRigidBody(groundRigidBodyCI);
+	
 	body->setFriction(100);
 	dynamicsWorld->addRigidBody(body);
 	body->setUserPointer(ground.get());
